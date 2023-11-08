@@ -1,0 +1,20 @@
+#!/bin/zsh
+# #popclip 
+# name: Send to Telegram
+# icon: iconify:simple-icons:telegram
+# language: shell
+# entitlements: [network]
+# options: 
+# - {identifier: token, label: Telegram Bot Token, type: string}
+# - {identifier: chatid, label: Chat ID, type: string}
+# after: show-status
+#   
+
+
+TOKEN=${POPCLIP_OPTION_TOKEN}
+
+CHAT_ID=${POPCLIP_OPTION_CHATID}
+
+MESSAGE=${POPCLIP_TEXT}
+
+curl -s -X POST https://api.telegram.org/bot$TOKEN/sendMessage -d chat_id=$CHAT_ID -d text="$MESSAGE"
