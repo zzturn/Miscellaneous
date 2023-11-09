@@ -1,0 +1,60 @@
+# http(s) and sock5 
+mixed-port: 7890
+# Transparent proxy server port for Linux and macOS (Redirect TCP and TProxy UDP)
+redir-port: 7892
+# allow connections to the local-end server from other LAN IP addresses
+allow-lan: true
+# This is only applicable when `allow-lan` is `true`, '*': bind all IP addresses
+bind-address: '*'
+
+mode: Rule
+log-level: info
+
+external-controller: 0.0.0.0:9090
+secret: abc
+
+# Outbound interface name
+# interface-name: eno1
+
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  ipv6: false
+  # 直连走 default-nameserver, 代理走 nameserver， nameserver 失败走 fallback
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 114.114.114.114
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '*.local'
+    - '*.lan'
+  use-hosts: true
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+    - tls://dns.rubyfish.cn:853
+    - tls://8.8.8.8:853
+  fallback:
+    - https://doh.dns.sb/dns-query
+    - https://dns.cloudflare.com/dns-query
+    - tls://8.8.4.4:853
+    - 8.8.8.8
+    - 1.1.1.1
+    - tls://1.1.1.1:853
+    - tcp://1.1.1.1:53
+    - tcp://208.67.222.222:443
+    - tls://dns.google
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+tun:
+  enable: true
+  stack: system
+  auto-redir: true
+  auto-route: true
+  # conflict with interface-name
+  auto-detect-interface: true
+  dns-hijack:
+    - any:53
