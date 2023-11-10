@@ -6,7 +6,7 @@
 
 [clash_for_windows 下载链接](https://archive.org/download/clash_for_windows_pkg)
 
-[clash_for_windows 文档](https://web.archive.org/web/20231110054147/https://doc.clashforwindows.app/quickstart/)
+[clash_for_windows 文档](https://web.archive.org/web/20230805125358/https://docs.cfw.lbyczf.com/)
 
 [clash premium docker 镜像](https://archive.org/download/clash-premium/clash-premium.tar) 使用下述命令即可恢复成 docker image
 
