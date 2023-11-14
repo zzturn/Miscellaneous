@@ -8,6 +8,7 @@
 # - {identifier: key, label: OpenAI API Token, type: string}
 # - {identifier: model, label: OpenAI API model, type: multiple, defaultValue:gpt-3.5-turbo, values:[gpt-4-1106-preview, gpt-4, gpt-3.5-turbo-1106, gpt-3.5-turbo, gpt-3.5-turbo-16k]}
 # - {identifier: language, label: Target language, type: multiple, values:[Chinese, English]}
+# - {identifier: url, label: OpenAI API user base, type: string, defaultValue: https://api.openai.com}
 # after: copy-result
 #
 
@@ -19,7 +20,9 @@ import subprocess
 key = os.environ['POPCLIP_OPTION_KEY']
 language = os.environ['POPCLIP_OPTION_LANGUAGE']
 model = os.environ['POPCLIP_OPTION_MODEL']
+url = os.environ['POPCLIP_OPTION_URL'].rstrip('/')
 text = os.environ['POPCLIP_TEXT']
+
 
 headers = {
     'Authorization': f'Bearer {key}',
@@ -35,7 +38,7 @@ data = {
 }
 
 try:
-    response = requests.post('https://openai.zturn.eu.org/v1/chat/completions', headers=headers, json=data)
+    response = requests.post(f'{url}/v1/chat/completions', headers=headers, json=data)
     response.raise_for_status()
 except requests.exceptions.RequestException as e:
     print(f"An error occurred: {e}")
@@ -44,7 +47,7 @@ except requests.exceptions.RequestException as e:
 response_data = response.json()
 summary = response_data['choices'][0]['message']['content']
 title = f"Openai translation costs {response_data['usage']['total_tokens']} tokens"
-print(summary)
+
 
 
 def show_dialog(title, text, default_answer="", giving_up=None):
@@ -57,7 +60,7 @@ def show_dialog(title, text, default_answer="", giving_up=None):
     applescript_command = f'''
     display dialog "{escaped_text}" with title "{escaped_title}" buttons {{"OK"}} {giving_up_str}
     '''
-    subprocess.run(["osascript", "-e", applescript_command])
+    subprocess.run(["osascript", "-e", applescript_command], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 
 # 显示弹窗
@@ -66,3 +69,4 @@ show_dialog(
     text=summary,
     giving_up=30
 )
+print(summary)
