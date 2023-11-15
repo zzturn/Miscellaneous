@@ -18,7 +18,7 @@ export default {
         const originalRequest = request.clone();
 
         // 校验
-        if (originalRequest.headers.get('Authorization') !== env.REQ_TOKEN) {
+        if (originalRequest.headers.get('Authorization') !== env.REQ_TOKEN && originalRequest.method !== 'OPTIONS') {
             return new Response('Access Denied', { status: 403, statusText: 'Forbidden' });
         }
 
@@ -42,7 +42,7 @@ export default {
         const modifiedRequest = new Request(url, {
             headers: requestHeaders,
             method: request.method,
-            body: request.body,
+            body: await request.arrayBuffer(),
             redirect: 'follow'
         });
 
