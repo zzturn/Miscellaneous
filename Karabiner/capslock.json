@@ -1162,7 +1162,15 @@
             "description":"command + q = Settings",
             "type":"basic",
             "from":{"key_code":"q","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-            "to":[{"shell_command":"Open -a Settings"}]
+            "to":[{"key_code":"h","modifiers":["left_command"]}],
+            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.systempreferences"]}]
+        },
+        {
+            "description":"command + q = Settings",
+            "type":"basic",
+            "from":{"key_code":"q","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+            "to":[{"shell_command":"Open -a Settings"}],
+            "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.systempreferences"]}]
         },
         {
             "description":"q = Activity Monitor",
