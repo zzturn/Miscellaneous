@@ -1162,31 +1162,71 @@
             "description":"command + q = Settings",
             "type":"basic",
             "from":{"key_code":"q","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-            "to":[{"shell_command":"Open -a Settings"}]
+            "to":[{"key_code":"h","modifiers":["left_command"]}],
+            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.systempreferences"]}]
+        },
+        {
+            "description":"command + q = Settings",
+            "type":"basic",
+            "from":{"key_code":"q","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+            "to":[{"shell_command":"Open -a Settings"}],
+            "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.systempreferences"]}]
         },
         {
             "description":"q = Activity Monitor",
             "type":"basic",
             "from":{"key_code":"q","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
-            "to":[{"shell_command":"open -a 'Activity Monitor'"}]
+            "to":[{"key_code":"h","modifiers":["left_command"]}],
+            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.ActivityMonitor"]}]
+        },
+        {
+            "description":"q = Activity Monitor",
+            "type":"basic",
+            "from":{"key_code":"q","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+            "to":[{"shell_command":"open -a 'Activity Monitor'"}],
+            "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.ActivityMonitor"]}]
         },
         {
             "description":"option + w = 'Telegram Lite'",
             "type":"basic",
             "from":{"key_code":"w","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
-            "to":[{"shell_command":"open -a 'Telegram Lite'"}]
+            "to":[{"shell_command":"open -a 'Telegram Lite'"}],
+            "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["org.telegram.desktop"]}]
+        },
+        {
+            "description":"option + w = 'Telegram Lite'",
+            "type":"basic",
+            "from":{"key_code":"w","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+            "to":[{"key_code":"h","modifiers":["left_command"]}],
+            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["org.telegram.desktop"]}]
         },
         {
             "description":"command + w = QQ",
             "type":"basic",
             "from":{"key_code":"w","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-            "to":[{"shell_command":"open -a 'QQ'"}]
+            "to":[{"shell_command":"open -a 'QQ'"}],
+            "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.tencent.qq"]}]
+        },
+        {
+            "description":"command + w = QQ",
+            "type":"basic",
+            "from":{"key_code":"w","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+            "to":[{"key_code":"h","modifiers":["left_command"]}],
+            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.tencent.qq"]}]
         },
         {
             "description":"w = WeChat",
             "type":"basic",
             "from":{"key_code":"w","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
-            "to":[{"shell_command":"open -a WeChat"}]
+            "to":[{"shell_command":"open -a WeChat"}],
+            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.tencent.xinWeChat"]}]
+        },
+        {
+            "description":"w = WeChat",
+            "type":"basic",
+            "from":{"key_code":"w","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+            "to":[{"key_code":"h","modifiers":["left_command"]}],
+            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.tencent.xinWeChat"]}]
         },
         {
             "description":"control + a = launchpad",
@@ -1205,6 +1245,18 @@
             "type":"basic",
             "from":{"key_code":"a","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
             "to":[{"key_code":"up_arrow","modifiers":["left_control"]}]
+        },
+        {
+            "description":"shift + a = toggle notification center(need to set shortcut on mac setting > keyboard > keyboard shortcut)",
+            "type":"basic",
+            "from":{"key_code":"a","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+            "to":[{"key_code":"n","modifiers":["left_option", "left_command"]}]
+        },
+        {
+            "description":"a = show/hide dock",
+            "type":"basic",
+            "from":{"key_code":"a","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+            "to":[{"key_code":"d","modifiers":["left_option", "left_command"]}]
         },
         {
             "description":"control + s = alter app-win rev",
@@ -1239,79 +1291,155 @@
           "description":"e = finder",
           "type":"basic",
           "from":{"key_code":"e","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a finder"}]
+          "to":[{"shell_command":"open -a finder"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.finder"]}]
+        },
+        {
+          "description":"e = finder",
+          "type":"basic",
+          "from":{"key_code":"e","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.finder"]}]
         },
         {
           "description":"control + e = Reminders",
           "type":"basic",
           "from":{"key_code":"e","modifiers":{"mandatory":["left_control","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a Reminders"}]
+          "to":[{"shell_command":"open -a Reminders"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.reminders"]}]
+        },
+        {
+          "description":"control + e = Reminders",
+          "type":"basic",
+          "from":{"key_code":"e","modifiers":{"mandatory":["left_control","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.reminders"]}]
         },
         {
           "description":"option + e = mail",
           "type":"basic",
           "from":{"key_code":"e","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a mail"}]
+          "to":[{"shell_command":"open -a mail"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.mail"]}]
+        },
+        {
+          "description":"option + e = mail",
+          "type":"basic",
+          "from":{"key_code":"e","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.mail"]}]
         },
         {
           "description":"command e = Calender",
           "type":"basic",
           "from":{"key_code":"e","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a Calendar"}]
+          "to":[{"shell_command":"open -a Calendar"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.iCal"]}]
+        },
+        {
+          "description":"command e = Calender",
+          "type":"basic",
+          "from":{"key_code":"e","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.iCal"]}]
         },
         {
           "description":"command + r = Termius",
           "type":"basic",
           "from":{"key_code":"r","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a Termius"}]
+          "to":[{"shell_command":"open -a Termius"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.termius-dmg.mac"]}]
+        },
+        {
+          "description":"command + r = Termius",
+          "type":"basic",
+          "from":{"key_code":"r","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.termius-dmg.mac"]}]
         },
         {
           "description":"option + r = terminal",
           "type":"basic",
           "from":{"key_code":"r","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a terminal"}]
+          "to":[{"shell_command":"open -a terminal"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.Terminal"]}]
+        },
+        {
+          "description":"option + r = terminal",
+          "type":"basic",
+          "from":{"key_code":"r","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.Terminal"]}]
         },
         {
           "description":"r = iTerm2",
           "type":"basic",
           "from":{"key_code":"r","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a iTerm"}]
+          "to":[{"shell_command":"open -a iTerm"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.googlecode.iterm2"]}]
+        },
+        {
+          "description":"r = iTerm2",
+          "type":"basic",
+          "from":{"key_code":"r","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.googlecode.iterm2"]}]
         },
         {
           "description":"command + t = Notion",
           "type":"basic",
           "from":{"key_code":"t","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a Notion"}]
+          "to":[{"shell_command":"open -a Notion"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["notion.id"]}]
         },
         {
-          "description":"control + t = Notion",
+          "description":"command + t = Notion",
           "type":"basic",
-          "from":{"key_code":"t","modifiers":{"mandatory":["left_control","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a Typora"}]
+          "from":{"key_code":"t","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["notion.id"]}]
         },
         {
           "description":"option + t = notes",
           "type":"basic",
           "from":{"key_code":"t","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a notes"}]
+          "to":[{"shell_command":"open -a notes"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.Notes"]}]
+        },
+        {
+          "description":"option + t = notes",
+          "type":"basic",
+          "from":{"key_code":"t","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.Notes"]}]
         },
         {
           "description":"t = vscode",
           "type":"basic",
           "from":{"key_code":"t","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a 'Visual Studio Code'"}]
+          "to":[{"shell_command":"open -a 'Visual Studio Code'"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.microsoft.VSCode"]}]
+        },
+        {
+          "description":"t = vscode",
+          "type":"basic",
+          "from":{"key_code":"t","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.microsoft.VSCode"]}]
         },
         {
           "description":"command + y = karabiner",
           "type":"basic",
           "from":{"key_code":"y","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a Karabiner-Elements"}]
+          "to":[{"shell_command":"open -a Karabiner-Elements"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["org.pqrs.Karabiner-Elements.Settings"]}]
         },
         {
-          "description":"option + y = amphetamine",
+          "description":"command + y = karabiner",
           "type":"basic",
-          "from":{"key_code":"y","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a amphetamine"}]
+          "from":{"key_code":"y","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["org.pqrs.Karabiner-Elements.Settings"]}]
         },
         {
           "description":"y = 'Parallels desktop'",
@@ -1323,61 +1451,127 @@
           "description":"command + f = DataGrip",
           "type":"basic",
           "from":{"key_code":"f","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -b com.jetbrains.datagrip"}]
+          "to":[{"shell_command":"open -b com.jetbrains.datagrip"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.jetbrains.datagrip"]}]
+        },
+        {
+          "description":"command + f = DataGrip",
+          "type":"basic",
+          "from":{"key_code":"f","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.jetbrains.datagrip"]}]
         },
         {
           "description":"option + f = PyCharm",
           "type":"basic",
           "from":{"key_code":"f","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -b com.jetbrains.pycharm"}]
+          "to":[{"shell_command":"open -b com.jetbrains.pycharm"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.jetbrains.pycharm"]}]
+        },
+        {
+          "description":"option + f = PyCharm",
+          "type":"basic",
+          "from":{"key_code":"f","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.jetbrains.pycharm"]}]
         },
         {
           "description":"ctrl + f = WebStorm",
           "type":"basic",
           "from":{"key_code":"f","modifiers":{"mandatory":["left_control","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -b com.jetbrains.webstorm"}]
+          "to":[{"shell_command":"open -b com.jetbrains.webstorm"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.jetbrains.webstorm"]}]
+        },
+        {
+          "description":"ctrl + f = WebStorm",
+          "type":"basic",
+          "from":{"key_code":"f","modifiers":{"mandatory":["left_control","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.jetbrains.webstorm"]}]
         },
         {
           "description":"f = Intellij IDEA",
           "type":"basic",
           "from":{"key_code":"f","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -b com.jetbrains.intellij"}]
+          "to":[{"shell_command":"open -b com.jetbrains.intellij"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.jetbrains.intellij"]}]
+        },
+        {
+          "description":"f = Intellij IDEA",
+          "type":"basic",
+          "from":{"key_code":"f","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.jetbrains.intellij"]}]
         },
         {
           "description":"command + g = Chrome",
           "type":"basic",
           "from":{"key_code":"g","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a 'Google Chrome'"}]
+          "to":[{"shell_command":"open -b com.google.Chrome"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.google.Chrome"]}]
         },
         {
-          "description":"option + g = Calender",
+          "description":"command + g = Chrome",
           "type":"basic",
-          "from":{"key_code":"g","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a Calendar"}]
+          "from":{"key_code":"g","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.google.Chrome"]}]
         },
         {
           "description":"g = Safari",
           "type":"basic",
           "from":{"key_code":"g","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a Safari"}]
+          "to":[{"shell_command":"open -a Safari"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.Safari"]}]
+        },
+        {
+          "description":"g = Safari",
+          "type":"basic",
+          "from":{"key_code":"g","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.Safari"]}]
         },
         {
           "description":"d = Postman",
           "type":"basic",
           "from":{"key_code":"d","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -b com.postmanlabs.mac"}]
+          "to":[{"shell_command":"open -b com.postmanlabs.mac"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.postmanlabs.mac"]}]
+        },
+        {
+          "description":"d = Postman",
+          "type":"basic",
+          "from":{"key_code":"d","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.postmanlabs.mac"]}]
         },
         {
           "description":"command + d = ChatGPT",
           "type":"basic",
           "from":{"key_code":"d","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -b com.google.Chrome.app.hacjfomalfkjonlkbpahnjdmehabbahn"}]
+          "to":[{"shell_command":"open -b com.google.Chrome.app.hacjfomalfkjonlkbpahnjdmehabbahn"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.google.Chrome.app.hacjfomalfkjonlkbpahnjdmehabbahn"]}]
+        },
+        {
+          "description":"command + d = ChatGPT",
+          "type":"basic",
+          "from":{"key_code":"d","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.google.Chrome.app.hacjfomalfkjonlkbpahnjdmehabbahn"]}]
         },
         {
           "description":"option + d = Apple Music",
           "type":"basic",
           "from":{"key_code":"d","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -b com.apple.Music"}]
+          "to":[{"shell_command":"open -b com.apple.Music"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.Music"]}]
+        },
+        {
+          "description":"option + d = Apple Music",
+          "type":"basic",
+          "from":{"key_code":"d","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.Music"]}]
         }
       ]
     },
