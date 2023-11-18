@@ -73,6 +73,13 @@
           "description":"option + h = move left word",
           "type":"basic",
           "from":{"key_code":"h","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"b","modifiers":["left_option"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]
+        },
+        {
+          "description":"option + h = move left word",
+          "type":"basic",
+          "from":{"key_code":"h","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"left_arrow","modifiers":["left_option"]}]
         },
         {
@@ -235,6 +242,13 @@
           "description":"option + l = move right word",
           "type":"basic",
           "from":{"key_code":"l","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"f","modifiers":["left_option"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]
+        },
+        {
+          "description":"option + l = move right word",
+          "type":"basic",
+          "from":{"key_code":"l","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"right_arrow","modifiers":["left_option"]}]
         },
         {
@@ -367,6 +381,13 @@
           "description":" i = command + <-",
           "type":"basic",
           "from":{"key_code":"i","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"a","modifiers":["left_control"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]
+        },
+        {
+          "description":" i = command + <-",
+          "type":"basic",
+          "from":{"key_code":"i","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"left_arrow","modifiers":["left_command"]}]
         },
         {
@@ -416,6 +437,13 @@
           "type":"basic",
           "from":{"key_code":"o","modifiers":{"mandatory":["left_shift","left_command","right_command","right_control","right_shift","right_option"]}},
           "to":[{"mouse_key":{"vertical_wheel":128}}]
+        },
+        {
+          "description":" o = command + ->",
+          "type":"basic",
+          "from":{"key_code":"o","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"e","modifiers":["left_control"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]
         },
         {
           "description":" o = command + ->",
@@ -714,6 +742,13 @@
           "description":"n = delete a word ahead",
           "type":"basic",
           "from":{"key_code":"n","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"w","modifiers":["left_control"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]
+        },
+        {
+          "description":"n = delete a word ahead",
+          "type":"basic",
+          "from":{"key_code":"n","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"delete_or_backspace","modifiers":["left_option"]}]
         },
         {
@@ -727,6 +762,13 @@
           "type":"basic",
           "from":{"key_code":"comma","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"delete_forward"}]
+        },
+        {
+          "description":". = delete a word after",
+          "type":"basic",
+          "from":{"key_code":"period","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"d","modifiers":["left_option"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]
         },
         {
           "description":". = delete a word after",
@@ -1219,7 +1261,7 @@
             "type":"basic",
             "from":{"key_code":"w","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
             "to":[{"shell_command":"open -a WeChat"}],
-            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.tencent.xinWeChat"]}]
+            "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.tencent.xinWeChat"]}]
         },
         {
             "description":"w = WeChat",
@@ -1479,15 +1521,15 @@
           "description":"ctrl + f = WebStorm",
           "type":"basic",
           "from":{"key_code":"f","modifiers":{"mandatory":["left_control","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -b com.jetbrains.webstorm"}],
-          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.jetbrains.webstorm"]}]
+          "to":[{"shell_command":"open -b com.jetbrains.WebStorm"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.jetbrains.WebStorm"]}]
         },
         {
           "description":"ctrl + f = WebStorm",
           "type":"basic",
           "from":{"key_code":"f","modifiers":{"mandatory":["left_control","right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"h","modifiers":["left_command"]}],
-          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.jetbrains.webstorm"]}]
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.jetbrains.WebStorm"]}]
         },
         {
           "description":"f = Intellij IDEA",
