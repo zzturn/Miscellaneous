@@ -1372,18 +1372,18 @@
           "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.mail"]}]
         },
         {
-          "description":"command e = Calender",
+          "description":"command e = Apple Music",
           "type":"basic",
           "from":{"key_code":"e","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
           "to":[{"shell_command":"open -a Calendar"}],
-          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.iCal"]}]
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.Music"]}]
         },
         {
-          "description":"command e = Calender",
+          "description":"command e = Apple Music",
           "type":"basic",
           "from":{"key_code":"e","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"h","modifiers":["left_command"]}],
-          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.iCal"]}]
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.Music"]}]
         },
         {
           "description":"command + r = Termius",
@@ -1484,10 +1484,11 @@
           "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["org.pqrs.Karabiner-Elements.Settings"]}]
         },
         {
-          "description":"y = 'Parallels desktop'",
+          "description":"y = org.pqrs.Karabiner-EventViewer",
           "type":"basic",
           "from":{"key_code":"y","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a 'Parallels desktop'"}]
+          "to":[{"shell_command":"open -b org.pqrs.Karabiner-EventViewer"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["org.pqrs.Karabiner-EventViewer"]}]
         },
         {
           "description":"command + f = DataGrip",
@@ -1588,32 +1589,32 @@
           "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.postmanlabs.mac"]}]
         },
         {
-          "description":"command + d = ChatGPT",
+          "description":"command + d = Surge",
           "type":"basic",
           "from":{"key_code":"d","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -b com.google.Chrome.app.hacjfomalfkjonlkbpahnjdmehabbahn"}],
-          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.google.Chrome.app.hacjfomalfkjonlkbpahnjdmehabbahn"]}]
+          "to":[{"shell_command":"open -b com.nssurge.surge-mac"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.nssurge.surge-mac"]}]
         },
         {
-          "description":"command + d = ChatGPT",
+          "description":"command + d = Surge",
           "type":"basic",
           "from":{"key_code":"d","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"h","modifiers":["left_command"]}],
-          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.google.Chrome.app.hacjfomalfkjonlkbpahnjdmehabbahn"]}]
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.nssurge.surge-mac"]}]
+        },
+        {
+          "description":"option + d = Surge Dashboard",
+          "type":"basic",
+          "from":{"key_code":"d","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"shell_command":"open -b com.nssurge.surge-dashboard"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.nssurge.surge-dashboard"]}]
         },
         {
           "description":"option + d = Apple Music",
           "type":"basic",
           "from":{"key_code":"d","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -b com.apple.Music"}],
-          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.Music"]}]
-        },
-        {
-          "description":"option + d = Apple Music",
-          "type":"basic",
-          "from":{"key_code":"d","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"h","modifiers":["left_command"]}],
-          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.Music"]}]
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.nssurge.surge-dashboard"]}]
         }
       ]
     },
