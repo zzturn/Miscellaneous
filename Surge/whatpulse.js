@@ -14,8 +14,9 @@ let p_json = JSON.parse(p_str);
 if ('data' in p_json && 'premium' in p_json['data']) {
     p_json['data']['premium'] = 1;
     let res_str = JSON.stringify(p_json);
-    console.log(`Rewrite with ${res_str}`)
+    console.log(`Rewrite with ${res_str}`);
     body = base64Encode(res_str);
+    console.log(body);
     $done({body});
 } else {
     console.log('Not processed.')
@@ -23,54 +24,55 @@ if ('data' in p_json && 'premium' in p_json['data']) {
 }
 
 function base64Encode(str) {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-    let encoded = '';
-    let i = 0;
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+  let encoded = '';
+  let i = 0;
 
-    while (i < str.length) {
+  while (i < str.length) {
       const a = i < str.length ? str.charCodeAt(i++) : 0;
       const b = i < str.length ? str.charCodeAt(i++) : 0;
       const c = i < str.length ? str.charCodeAt(i++) : 0;
-  
+
       const b1 = (a >> 2) & 0x3F;
       const b2 = ((a & 0x03) << 4) | ((b >> 4) & 0x0F);
       const b3 = ((b & 0x0F) << 2) | ((c >> 6) & 0x03);
       const b4 = c & 0x3F;
-  
-      if (i > str.length + 1) {
-        encoded += chars.charAt(b1) + chars.charAt(b2) + '==';
-      } else if (i > str.length) {
-        encoded += chars.charAt(b1) + chars.charAt(b2) + chars.charAt(b3) + '=';
+
+      if (b === 0 && c === 0) {
+          encoded += chars.charAt(b1) + chars.charAt(b2) + '==';
+      } else if (c === 0) {
+          encoded += chars.charAt(b1) + chars.charAt(b2) + chars.charAt(b3) + '=';
       } else {
-        encoded += chars.charAt(b1) + chars.charAt(b2) + chars.charAt(b3) + chars.charAt(b4);
+          encoded += chars.charAt(b1) + chars.charAt(b2) + chars.charAt(b3) + chars.charAt(b4);
       }
-    }
-  
-    return encoded;
   }
 
-function base64Decode(str) {
+  return encoded;
+}
+
+
+  function base64Decode(str) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
     let decoded = '';
     let i = 0;
-
+  
     // Remove any characters that are not base64 character set, including padding (=)
     str = str.replace(/[^A-Za-z0-9\+\/]/g, '');
-
+  
     while (i < str.length) {
-        const b1 = chars.indexOf(str.charAt(i++));
-        const b2 = chars.indexOf(str.charAt(i++));
-        const b3 = chars.indexOf(str.charAt(i++));
-        const b4 = chars.indexOf(str.charAt(i++));
-
-        const a = ((b1 & 0x3F) << 2) | ((b2 >> 4) & 0x03);
-        const b = ((b2 & 0x0F) << 4) | ((b3 >> 2) & 0x0F);
-        const c = ((b3 & 0x03) << 6) | (b4 & 0x3F);
-
-        decoded += String.fromCharCode(a);
-        if (b3 !== 64) decoded += String.fromCharCode(b);
-        if (b4 !== 64) decoded += String.fromCharCode(c);
+      const b1 = chars.indexOf(str.charAt(i++));
+      const b2 = chars.indexOf(str.charAt(i++));
+      const b3 = chars.indexOf(str.charAt(i++));
+      const b4 = chars.indexOf(str.charAt(i++));
+  
+      const a = ((b1 & 0x3F) << 2) | ((b2 >> 4) & 0x03);
+      const b = ((b2 & 0x0F) << 4) | ((b3 >> 2) & 0x0F);
+      const c = ((b3 & 0x03) << 6) | (b4 & 0x3F);
+  
+      decoded += String.fromCharCode(a);
+      if (b3 !== 64) decoded += String.fromCharCode(b);
+      if (b4 !== 64) decoded += String.fromCharCode(c);
     }
-
+  
     return decoded;
-}
+  }
