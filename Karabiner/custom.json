@@ -2,7 +2,7 @@
     "title": "Personal custom config",
     "rules": [
         {
-            "description": "Change tab + m,.jkluoi to 1234567890",
+            "description": "Custom: Change tab + m,.jkluoi to 1234567890",
             "manipulators": [
                 {
                     "type":"basic",
@@ -75,7 +75,7 @@
             ]
         },
         {
-            "description": "Double ⌘+q to quit",
+            "description": "Custom: Double ⌘+q to quit",
             "manipulators": [
                 {
                     "type":"basic",
@@ -93,7 +93,7 @@
             ]
         },
         {
-            "description": "Enable mouse back, forward in Finder, Safari",
+            "description": "Custom: Enable mouse back, forward in Finder, Safari",
             "manipulators": [
                 {
                     "type":"basic",
@@ -110,7 +110,7 @@
             ]
         },
         {
-            "description": "Enable mouse button3 to open parent folder in Finder",
+            "description": "Custom: Enable mouse button3 to open parent folder in Finder",
             "manipulators": [
                 {
                     "type":"basic",
@@ -121,7 +121,7 @@
             ]
         },
         {
-            "description": "Enable mouse button3 to close current tab in Safari, Chrome",
+            "description": "Custom: Enable mouse button3 to close current tab in Safari, Chrome",
             "manipulators": [
                 {
                     "type":"basic",
@@ -132,7 +132,7 @@
             ]
         },
         {
-            "description": "Enable mouse button1+button2 to open url switch Safari, Chrome",
+            "description": "Custom: Enable mouse button1+button2 to open url switch Safari, Chrome",
             "manipulators": [
                 {
                     "type":"basic",
@@ -143,13 +143,65 @@
             ]
         },
         {
-            "description": "Map delete to command+backspace to delete file in Finder",
+            "description": "Custom: Map delete to command+backspace to delete file in Finder",
             "manipulators": [
                 {
                     "type":"basic",
                     "from":{"key_code":"delete_forward"},
                     "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.apple.finder"]}],
                     "to":[{"repeat":true,"key_code":"delete_or_backspace","modifiers":["left_gui"]}]
+                }
+            ]
+        },
+        {
+            "description": "Custom: Map f12 to open dev tools in Safari",
+            "manipulators": [
+                {
+                    "type":"basic",
+                    "from":{"key_code":"f12"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.apple.Safari"]}],
+                    "to":[{"repeat":true,"key_code":"i","modifiers":["left_command", "left_option"]}]
+                }
+            ]
+        },
+        {
+            "description": "Custom: Map ctrl+space to shift in rime",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "modifiers": {
+                            "mandatory": [
+                                "left_control"
+                            ]
+                        },
+                        "key_code": "spacebar"
+                    },
+                    "conditions": [{"type": "input_source_if", "input_sources": [{"language":"zh-Hans"}]}],
+                    "to": [
+                        {
+                            "key_code": "left_shift"
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "modifiers": {
+                            "mandatory": [
+                                "left_control"
+                            ]
+                        },
+                        "key_code": "spacebar"
+                    },
+                    "to": [
+                        {
+                            "select_input_source": {
+                                "language": "zh-Hans"
+                            }
+                        }
+                    ],
+                    "conditions": [{"type": "input_source_if", "input_sources": [{"language":"en"}]}]
                 }
             ]
         }

@@ -12,7 +12,7 @@
   "repo": "https://github.com/zzturn/Miscellaneous/Karabiner",
   "rules": [
     {
-      "description": "CapsLock to Hyper",
+      "description": "Capslock: CapsLock to Hyper",
       "manipulators": [
         {
           "description":"capslock = esc(click) | hyper(hold)",
@@ -42,7 +42,7 @@
       ]
     },
     {
-      "description": "Hyper Navigation",
+      "description": "Capslock: Hyper Navigation",
       "manipulators": [
 
         {
@@ -688,7 +688,7 @@
       ]
     },
     {
-      "description": "Hyper Deletion",
+      "description": "Capslock: Hyper Deletion",
       "manipulators": [
         {
           "description":"option + n = delete whole line",
@@ -779,7 +779,7 @@
       ]
     },
     {
-      "description": "Hyper MouseKey",
+      "description": "Capslock: Hyper MouseKey",
       "manipulators": [
         {
           "description":"keypad0 = mouse left click",
@@ -1162,7 +1162,7 @@
       ]
     },
     {
-      "description": "Hyper Window",
+      "description": "Capslock: Hyper Window",
       "manipulators": [
         {
           "description":"shift + tab = alter tab",
@@ -1327,7 +1327,7 @@
       ]
     },
     {
-      "description": "Hyper Application",
+      "description": "Capslock: Hyper Application",
       "manipulators": [
         {
           "description":"e = finder",
@@ -1375,7 +1375,7 @@
           "description":"command e = Apple Music",
           "type":"basic",
           "from":{"key_code":"e","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a Calendar"}],
+          "to":[{"shell_command":"open -b com.apple.Music"}],
           "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.Music"]}]
         },
         {
@@ -1454,6 +1454,20 @@
           "from":{"key_code":"t","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"h","modifiers":["left_command"]}],
           "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.Notes"]}]
+        },
+        {
+          "description":"control + t = typora",
+          "type":"basic",
+          "from":{"key_code":"t","modifiers":{"mandatory":["left_control","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"shell_command":"open -b abnerworks.Typora"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["abnerworks.Typora"]}]
+        },
+        {
+          "description":"control + t = typora",
+          "type":"basic",
+          "from":{"key_code":"t","modifiers":{"mandatory":["left_control","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["abnerworks.Typora"]}]
         },
         {
           "description":"t = vscode",
@@ -1561,6 +1575,20 @@
           "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.google.Chrome"]}]
         },
         {
+          "description":"option + g = firefox",
+          "type":"basic",
+          "from":{"key_code":"g","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"shell_command":"open -b org.mozilla.firefox"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["org.mozilla.firefox"]}]
+        },
+        {
+          "description":"option + g = firefox",
+          "type":"basic",
+          "from":{"key_code":"g","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["org.mozilla.firefox"]}]
+        },
+        {
           "description":"g = Safari",
           "type":"basic",
           "from":{"key_code":"g","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
@@ -1610,16 +1638,30 @@
           "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.nssurge.surge-dashboard"]}]
         },
         {
-          "description":"option + d = Apple Music",
+          "description":"option + d = Surge Dashboard",
           "type":"basic",
           "from":{"key_code":"d","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"h","modifiers":["left_command"]}],
           "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.nssurge.surge-dashboard"]}]
+        },
+        {
+          "description":"x = chatgpt",
+          "type":"basic",
+          "from":{"key_code":"x","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"shell_command":"open -b com.google.Chrome.app.hacjfomalfkjonlkbpahnjdmehabbahn"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.google.Chrome.app.hacjfomalfkjonlkbpahnjdmehabbahn"]}]
+        },
+        {
+          "description":"x = chatgpt",
+          "type":"basic",
+          "from":{"key_code":"x","modifiers":{"mandatory":["right_command","right_control","right_shift","right_option"]}},
+          "to":[{"key_code":"h","modifiers":["left_command"]}],
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.google.Chrome.app.hacjfomalfkjonlkbpahnjdmehabbahn"]}]
         }
       ]
     },
     {
-      "description": "Hyper Clipboard",
+      "description": "Capslock: Hyper Clipboard",
       "manipulators": [
         {
           "description":"command + 1 = copy to clip1",
@@ -1744,7 +1786,7 @@
       ]
     },
     {
-      "description": "Hyper Functional",
+      "description": "Capslock: Hyper Functional",
       "manipulators": [
         {
           "description":"command + F1 = desktop 1",
