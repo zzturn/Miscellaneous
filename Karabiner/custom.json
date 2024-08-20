@@ -234,19 +234,19 @@
                 },
                 {
                     "type":"basic",
-                    "from":{"key_code": "left_arrow", "modifiers": {"optional": ["right_control"]}},
+                    "from":{"key_code": "delete_forward", "modifiers": {"optional": ["right_control"]}},
                     "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
                     "to":{"key_code": "4"}
                 },
                 {
                     "type":"basic",
-                    "from":{"key_code": "down_arrow", "modifiers": {"optional": ["right_control"]}},
+                    "from":{"key_code": "end", "modifiers": {"optional": ["right_control"]}},
                     "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
                     "to":{"key_code": "5"}
                 },
                 {
                     "type":"basic",
-                    "from":{"key_code": "right_arrow", "modifiers": {"optional": ["right_control"]}},
+                    "from":{"key_code": "page_down", "modifiers": {"optional": ["right_control"]}},
                     "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
                     "to":{"key_code": "6"}
                 }
