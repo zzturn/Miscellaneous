@@ -18,6 +18,14 @@ if ('data' in p_json && 'premium' in p_json['data']) {
     body = base64Encode(res_str);
     console.log(body);
     $done({body});
+} else if('data' in p_json && 'is_premium' in p_json['data']){
+    p_json['data']['is_premium'] = 1;
+    // todo 这个 response 还有一个字段是 premium_date: "" 不知道是什么时间格式,就没乱改了
+    let res_str = JSON.stringify(p_json);
+    console.log(`Rewrite with ${res_str}`);
+    body = base64Encode(res_str);
+    console.log(body);
+    $done({body});
 } else {
     console.log('Not processed.')
     $done({});
