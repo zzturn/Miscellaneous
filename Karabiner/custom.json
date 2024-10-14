@@ -254,7 +254,15 @@
                     "type":"basic",
                     "from":{"key_code": "f18"},
                     "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
-                    "to":{"key_code": "3", "modifiers":["left_shift"]}
+                    "to": [
+                        {
+                            "key_code": "left_shift",
+                            "hold_down_milliseconds": 200
+                        },
+                        {
+                            "key_code": "3"
+                        }
+                    ]
                 }
             ]
         }
