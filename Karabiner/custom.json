@@ -210,7 +210,7 @@
             "manipulators": [
                 {
                     "type":"basic",
-                    "from":{"key_code": "up_arrow", "modifiers": {"optional": ["right_control, left_command, left_control"]}},
+                    "from":{"key_code": "up_arrow", "modifiers": {"optional": ["right_control", "left_command", "left_control"]}},
                     "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
                     "to":{"key_code": "f"}
                 },
