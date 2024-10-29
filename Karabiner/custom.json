@@ -206,7 +206,7 @@
             ]
         },
         {
-            "description": "Custom: Enable map up, left, down, right, delete, end, page_down, f18 to f,1,2,3,4,5,6, shift+3 in dst",
+            "description": "Custom: Enable map up, left, down, right, delete, end, page_down, f3, f18, f19 to f,1,2,3,4,5,6,p,m, shift+3 in dst",
             "manipulators": [
                 {
                     "type":"basic",
@@ -252,7 +252,7 @@
                 },
                 {
                     "type":"basic",
-                    "from":{"key_code": "f18"},
+                    "from":{"key_code": "f19"},
                     "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
                     "to": [
                         {
@@ -261,6 +261,26 @@
                         },
                         {
                             "key_code": "3"
+                        }
+                    ]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code": "f18"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to": [
+                        {
+                            "key_code": "m"
+                        }
+                    ]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code": "f3"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to": [
+                        {
+                            "key_code": "p"
                         }
                     ]
                 }
