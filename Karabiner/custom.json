@@ -276,7 +276,7 @@
                 },
                 {
                     "type":"basic",
-                    "from":{"key_code": "f3"},
+                    "from":{"key_code": "button3"},
                     "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
                     "to": [
                         {
