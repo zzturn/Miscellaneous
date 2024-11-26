@@ -1229,18 +1229,18 @@
             "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.ActivityMonitor"]}]
         },
         {
-            "description":"option + w = 'Telegram Lite'",
+            "description":"option + w = 'Telegram'",
             "type":"basic",
             "from":{"key_code":"w","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
-            "to":[{"shell_command":"open -a 'Telegram Lite'"}],
-            "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["org.telegram.desktop"]}]
+            "to":[{"shell_command":"open -a 'Telegram'"}],
+            "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.tdesktop.Telegram"]}]
         },
         {
-            "description":"option + w = 'Telegram Lite'",
+            "description":"option + w = 'Telegram'",
             "type":"basic",
             "from":{"key_code":"w","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
             "to":[{"key_code":"h","modifiers":["left_command"]}],
-            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["org.telegram.desktop"]}]
+            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.tdesktop.Telegram"]}]
         },
         {
             "description":"command + w = QQ",
