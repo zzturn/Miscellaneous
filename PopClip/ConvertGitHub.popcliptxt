@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+# #popclip 
+# name: Convert GitHub URL
+# icon: iconify:simple-icons:github
+# language: python3
+# after: show-status
+#   
+
+import re
+import webbrowser
+import os
+import sys
+
+
+text = os.environ['POPCLIP_TEXT']
+
+def convert_to_raw(url):
+    # 检查是否为 Gist URL
+    if "gist.github.com" in url:
+        raw_url = re.sub(r'gist.github.com', 'gist.githubusercontent.com', url)
+    else:
+        raw_url = re.sub(r'github.com', 'raw.githubusercontent.com', url)
+        raw_url = re.sub(r'/blob/', '/', raw_url)
+        raw_url = re.sub(r'/tree/', '/', raw_url)
+    return raw_url
+
+def convert_to_repo(url):
+    # 检查是否为 Gist raw URL
+    if "gist.githubusercontent.com" in url:
+        repo_url = re.sub(r'gist.githubusercontent.com', 'gist.github.com', url)
+        repo_url = re.sub(r'/raw', '', repo_url)
+    else:
+        parts = url.split('/')
+        user_repo = '/'.join(parts[3:5])
+        branch_path = '/'.join(parts[5:])
+        repo_url = f"https://github.com/{user_repo}/blob/{branch_path}"
+    return repo_url
+
+def add_protocol_if_missing(url):
+    if not re.match(r'^https?://', url):
+        url = f"https://{url}"
+    return url
+
+def open_url_in_browser(url):
+    webbrowser.open(url)
+
+def main(text):
+
+    input_url = text
+
+    input_url = add_protocol_if_missing(input_url)
+
+    if "github.com" in input_url and ("/blob/" in input_url or "/tree/" in input_url) or "gist.github.com" in input_url:
+        print("Detected GitHub repository or Gist URL.")
+        converted_url = convert_to_raw(input_url)
+    elif "raw.githubusercontent.com" in input_url or "gist.githubusercontent.com" in input_url:
+        print("Detected raw GitHub or Gist URL.")
+        converted_url = convert_to_repo(input_url)
+    else:
+        print("The provided URL does not appear to be a valid GitHub repository, Gist URL, or raw content URL.")
+        sys.exit(1)
+
+    print("Converted URL:", converted_url)
+    open_url_in_browser(converted_url)
+
+if __name__ == "__main__":
+    main(text)
+    #main("https://gist.github.com/fedarko/4fc177cff9084b9e325dcbe954547edc/raw/gh_url_to_raw_gh_url.py")
+    #main("https://gist.github.com/fedarko/4fc177cff9084b9e325dcbe954547edc")
+    #main("https://github.com/89996462/Quantumult-X/blob/main/ycdz/Picsew.js")
+    #main("https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/Picsew.js")
+    #main("github.com/89996462/Quantumult-X/blob/main/ycdz/Picsew.js")
+    #main("raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/Picsew.js")
