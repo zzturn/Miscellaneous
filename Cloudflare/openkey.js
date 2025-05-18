@@ -1,4 +1,8 @@
 /**
+ * Deprecated !!!
+ * Deprecated !!!
+ * Deprecated !!!
+ * 
  * 用于 openai 反向代理，同时将 token 与请求解耦，但需要额外维护 tokens 池
  * 个人使用场景就是，对于一些额度不高/稳定性不高的 tokens 池，根据每个请求随机选择 token，避免常规用法中，单一 token 不稳定导致需要频繁切换 token
  * 
