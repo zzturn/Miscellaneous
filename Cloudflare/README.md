@@ -12,4 +12,4 @@
  - Gist 原始URL: https://gist.githubusercontent.com/zzturn/baf95b2092a37051e1b8de08e6882a91/raw/index.html
  - Worker 访问URL: https://gist.zturn.eu.org/zzturn/baf95b2092a37051e1b8de08e6882a91/raw/index.html
 
-[`strava-webhook.js`](https://github.com/zzturn/Miscellaneous/raw/master/Cloudflare/strava-webhook.js) Strava Webhook 事件处理器，触发 `GitHub Workflow`. 作者主要用于跑步运动之后 `running_page` 的数据更新。
+[`strava-webhook.js`](https://github.com/zzturn/Miscellaneous/raw/master/Cloudflare/strava-webhook.js) Strava Webhook 事件处理器，触发 `GitHub Workflow`. 作者主要用于跑步运动之后 `running_page` 的数据更新以及日历中活动记录的更新。
