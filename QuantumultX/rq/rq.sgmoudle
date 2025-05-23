@@ -1,0 +1,12 @@
+#!name=RQ Run VIP Patch
+#!desc=解锁 RQ Run VIP 并修改相关接口返回
+
+[Script]
+# 1. 替换网页源码VIP声明
+RQ-VIP-Web = type=http-response,pattern=^https:\/\/www\.rq\.run\/user,requires-body=1,max-size=0,script-path=https://github.com/zzturn/Miscellaneous/raw/master/QuantumultX/rq/rq-web.js
+
+# 2. 替换API接口数据
+RQ-VIP-API = type=http-response,pattern=^https:\/\/api\.rq\.run\/Api\/(User\/(runLevel|get_user_info)|Workout\/get_user_workout_now),requires-body=1,max-size=0,script-path=https://github.com/zzturn/Miscellaneous/raw/master/QuantumultX/rq/rq.js
+
+[MITM]
+hostname = *.rq.run
