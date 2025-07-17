@@ -1229,32 +1229,46 @@
             "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.ActivityMonitor"]}]
         },
         {
-            "description":"option + w = 'Telegram'",
+            "description":"control + w = 'Telegram'",
             "type":"basic",
-            "from":{"key_code":"w","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+            "from":{"key_code":"w","modifiers":{"mandatory":["left_control","right_command","right_control","right_shift","right_option"]}},
             "to":[{"shell_command":"open -a 'Telegram'"}],
             "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.tdesktop.Telegram"]}]
         },
         {
-            "description":"option + w = 'Telegram'",
+            "description":"control + w = 'Telegram'",
             "type":"basic",
-            "from":{"key_code":"w","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+            "from":{"key_code":"w","modifiers":{"mandatory":["left_control","right_command","right_control","right_shift","right_option"]}},
             "to":[{"key_code":"h","modifiers":["left_command"]}],
             "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.tdesktop.Telegram"]}]
         },
         {
-            "description":"command + w = QQ",
+            "description":"option + w = QQ",
             "type":"basic",
-            "from":{"key_code":"w","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+            "from":{"key_code":"w","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
             "to":[{"shell_command":"open -a 'QQ'"}],
             "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.tencent.qq"]}]
         },
         {
-            "description":"command + w = QQ",
+            "description":"option + w = QQ",
+            "type":"basic",
+            "from":{"key_code":"w","modifiers":{"mandatory":["left_option","right_command","right_control","right_shift","right_option"]}},
+            "to":[{"key_code":"h","modifiers":["left_command"]}],
+            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.tencent.qq"]}]
+        },
+        {
+            "description":"command + w = iMessage",
+            "type":"basic",
+            "from":{"key_code":"w","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
+            "to":[{"shell_command":"open -b com.apple.MobileSMS'"}],
+            "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["com.apple.MobileSMS"]}]
+        },
+        {
+            "description":"command + w = iMessage",
             "type":"basic",
             "from":{"key_code":"w","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
             "to":[{"key_code":"h","modifiers":["left_command"]}],
-            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.tencent.qq"]}]
+            "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.apple.MobileSMS"]}]
         },
         {
             "description":"w = WeChat",
@@ -1428,18 +1442,18 @@
           "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["com.googlecode.iterm2"]}]
         },
         {
-          "description":"command + t = Notion",
+          "description":"command + t = Obsidian",
           "type":"basic",
           "from":{"key_code":"t","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
-          "to":[{"shell_command":"open -a Notion"}],
-          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["notion.id"]}]
+          "to":[{"shell_command":"open -b md.obsidian"}],
+          "conditions": [{"type": "frontmost_application_unless", "bundle_identifiers": ["md.obsidian"]}]
         },
         {
-          "description":"command + t = Notion",
+          "description":"command + t = Obsidian",
           "type":"basic",
           "from":{"key_code":"t","modifiers":{"mandatory":["left_command","right_command","right_control","right_shift","right_option"]}},
           "to":[{"key_code":"h","modifiers":["left_command"]}],
-          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["notion.id"]}]
+          "conditions": [{"type": "frontmost_application_if", "bundle_identifiers": ["md.obsidian"]}]
         },
         {
           "description":"option + t = notes",
