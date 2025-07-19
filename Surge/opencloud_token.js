@@ -2,6 +2,10 @@
  * opencloud_token = type=http-request,pattern=^https:\/\/openkey\.cloud\/.*,requires-body=1,max-size=-1,timeout=10,script-path=https://raw.githubusercontent.com/zzturn/Miscellaneous/master/Surge/opencloud_token.js
  * 
  * (Self-use) To rewrite authorization
+ * 
+ * @deprecated 已放弃维护
+ * @author zzturn
+ * @see https://github.com/zzturn/Miscellaneous
  */
 
 

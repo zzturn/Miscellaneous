@@ -86,7 +86,6 @@ ca-passphrase =
 ca-p12 = 
   
 [Script]
-chatsmith = type=http-request,pattern=^https:\/\/chatgpt\.vulcanlabs\.co\/.*,requires-body=1,max-size=0,script-path=https://github.com/zzturn/Miscellaneous/raw/refs/heads/master/Surge/chatsmith.js
 GoogleCAPTCHA = type=http-response,pattern=^https:\/\/www\.google\.com(\.[a-z]+|)\/search\?(client=[a-z-]+&|)q=,requires-body=1,max-size=0,timeout=10,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Google_CAPTCHA.js
 whatpulse = type=http-response,pattern=^https:\/\/client\.whatpulse\.org\/v3\.0\/,requires-body=1,max-size=0,script-path=https://github.com/zzturn/Miscellaneous/raw/refs/heads/master/Surge/whatpulse.js
 

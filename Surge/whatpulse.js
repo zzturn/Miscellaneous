@@ -1,86 +1,68 @@
 /**
+ * 破解 whatpulse 会员功能
+ * 
  * whatpulse = type=http-response,pattern=^https:\/\/client\.whatpulse\.org\/v3\.0\/,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/zzturn/Miscellaneous/master/Surge/whatpulse.js
- * whatpulse 解锁 premium
+ * 
+ * @author zzturn
+ * @see https://github.com/zzturn/Miscellaneous
  */
-let body_str = $response.body;
 
-let p_str = base64Decode(body_str);
-p_str = p_str.replace(/[\0\s]+$/g, '');
-console.log(`Origin data: ${p_str}`);
-
-let p_json = JSON.parse(p_str);
-
-
-if ('data' in p_json && 'premium' in p_json['data']) {
-    p_json['data']['premium'] = 1;
-    let res_str = JSON.stringify(p_json);
-    console.log(`Rewrite with ${res_str}`);
-    body = base64Encode(res_str);
-    console.log(body);
-    $done({body});
-} else if('data' in p_json && 'is_premium' in p_json['data']){
-    p_json['data']['is_premium'] = 1;
-    // todo 这个 response 还有一个字段是 premium_date: "" 不知道是什么时间格式,就没乱改了
-    let res_str = JSON.stringify(p_json);
-    console.log(`Rewrite with ${res_str}`);
-    body = base64Encode(res_str);
-    console.log(body);
-    $done({body});
-} else {
-    console.log('Not processed.')
+function base64Decode(str) {
+  // Surge 里可以直接用 atob
+  try {
+    return decodeURIComponent(escape(atob(str)));
+  } catch (e) {
+    console.log("base64 解码失败: " + e);
     $done({});
+  }
 }
 
 function base64Encode(str) {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-  let encoded = '';
-  let i = 0;
-
-  while (i < str.length) {
-      const a = i < str.length ? str.charCodeAt(i++) : 0;
-      const b = i < str.length ? str.charCodeAt(i++) : 0;
-      const c = i < str.length ? str.charCodeAt(i++) : 0;
-
-      const b1 = (a >> 2) & 0x3F;
-      const b2 = ((a & 0x03) << 4) | ((b >> 4) & 0x0F);
-      const b3 = ((b & 0x0F) << 2) | ((c >> 6) & 0x03);
-      const b4 = c & 0x3F;
-
-      if (b === 0 && c === 0) {
-          encoded += chars.charAt(b1) + chars.charAt(b2) + '==';
-      } else if (c === 0) {
-          encoded += chars.charAt(b1) + chars.charAt(b2) + chars.charAt(b3) + '=';
-      } else {
-          encoded += chars.charAt(b1) + chars.charAt(b2) + chars.charAt(b3) + chars.charAt(b4);
-      }
+  // Surge 里可以直接用 btoa
+  try {
+    return btoa(unescape(encodeURIComponent(str)));
+  } catch (e) {
+    console.log("base64 编码失败: " + e);
+    $done({});
   }
-
-  return encoded;
 }
 
+try {
+  console.log("whatpulse 脚本启动");
 
-  function base64Decode(str) {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-    let decoded = '';
-    let i = 0;
-  
-    // Remove any characters that are not base64 character set, including padding (=)
-    str = str.replace(/[^A-Za-z0-9\+\/]/g, '');
-  
-    while (i < str.length) {
-      const b1 = chars.indexOf(str.charAt(i++));
-      const b2 = chars.indexOf(str.charAt(i++));
-      const b3 = chars.indexOf(str.charAt(i++));
-      const b4 = chars.indexOf(str.charAt(i++));
-  
-      const a = ((b1 & 0x3F) << 2) | ((b2 >> 4) & 0x03);
-      const b = ((b2 & 0x0F) << 4) | ((b3 >> 2) & 0x0F);
-      const c = ((b3 & 0x03) << 6) | (b4 & 0x3F);
-  
-      decoded += String.fromCharCode(a);
-      if (b3 !== 64) decoded += String.fromCharCode(b);
-      if (b4 !== 64) decoded += String.fromCharCode(c);
-    }
-  
-    return decoded;
+  const decoded = $response.body ? base64Decode($response.body) : null;
+  if (!decoded) {
+    console.log("body 为空或解码失败，直接返回原始内容");
+    $done({});
   }
+
+  console.log("base64解码后内容: " + decoded);
+
+  let obj;
+  try {
+    obj = JSON.parse(decoded);
+  } catch (e) {
+    console.log("JSON解析失败: " + e);
+    $done({});
+  }
+
+  if (obj.data && typeof obj.data === "object" && obj.data.hasOwnProperty("premium")) {
+    console.log("检测到 data.premium 字段，准备修改...");
+    obj.data.premium = 1;
+    obj.data.premium_expire = "2099-07-30T00:00:00.000000Z";
+    const newBody = base64Encode(JSON.stringify(obj));
+    if (!newBody) {
+      console.log("base64编码失败，返回原始内容");
+      $done({});
+    } else {
+      console.log("修改成功，返回新body");
+      $done({ body: newBody });
+    }
+  } else {
+    console.log("未检测到 data.premium 字段，返回原始内容");
+    $done({});
+  }
+} catch (err) {
+  console.log("脚本异常: " + err);
+  $done({});
+}

@@ -2,6 +2,10 @@
  * opencloud_remove = type=http-response,pattern=^https:\/\/openkey\.cloud\/.*,requires-body=1,max-size=1024,script-path=https://raw.githubusercontent.com/zzturn/Miscellaneous/master/Surge/opencloud_remove.js
  * 
  * (Self-use) To remove some token invalid.
+ * 
+ * @deprecated 已放弃维护
+ * @author zzturn
+ * @see https://github.com/zzturn/Miscellaneous
  */
 let headers = $request.headers;
 let body_str = $response.body;
