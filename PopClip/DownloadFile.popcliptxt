@@ -1,0 +1,51 @@
+#!/bin/zsh
+# #popclip 
+# name: Download file
+# description: 下载文件到~/Downloads目录，支持指定后缀名的URL
+# icon: symbol:icloud.and.arrow.down.fill
+# language: shell
+# requirements: ["url"]
+# options: 
+# - {identifier: exts, label: 文件后缀, type: string}
+# after: show-status
+#  
+
+# 获取选中的文本（即URL）
+url="$POPCLIP_TEXT"
+
+# 校验URL是否为空
+if [[ -z "$url" ]]; then
+    osascript -e "display notification \"未检测到URL\" with title \"PopClip iTerm下载\""
+    exit 1
+fi
+
+# 获取文件名
+filename=$(basename "$url")
+
+# 下载目录
+download_dir=~/Downloads
+
+# 检查URL是否以指定后缀结尾（可配置）
+exts="${POPCLIP_OPTION_EXTS:-pdf,mp4}"
+exts_regex=$(echo "$exts" | sed 's/,/|/g')
+
+if [[ "$url" =~ \.($exts_regex)$ ]]; then
+    curl_cmd="curl -L -o '$download_dir/$filename' '$url'"
+    # 确保iTerm已启动
+    open -a iTerm
+    # 用AppleScript调起iTerm2并输入命令
+    osascript <<APPLESCRIPT
+tell application "iTerm"
+    activate
+    tell current window
+        set newTab to (create tab with default profile)
+        tell current session of newTab
+            write text "$curl_cmd"
+        end tell
+    end tell
+end tell
+APPLESCRIPT
+else
+    osascript -e "display notification \"URL后缀不被允许\" with title \"PopClip iTerm下载\""
+    exit 1
+fi
