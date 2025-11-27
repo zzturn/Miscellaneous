@@ -1,0 +1,167 @@
+#!/bin/bash
+# #popclip
+# name: Mermaid Preview
+# icon: iconify:simple-icons:mermaid
+# identifier: com.zzturn.mermaid.preview
+# language: shell
+# after: show-result
+# options:
+# - {identifier: debug, label: Debug Mode, type: boolean, defaultValue: false}
+
+# ============
+# PopClip Mermaid 图表渲染扩展
+# ============
+
+# 设置 PATH 环境变量 - PopClip 关键！必须显式设置 NVM 路径
+export PATH="/Users/xin/.nvm/versions/node/v24.11.0/bin:/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin"
+
+# ============
+# 配置和变量初始化
+# ============
+
+# 获取配置选项 - PopClip 布尔值用 0/1 表示
+DEBUG_MODE=${POPCLIP_OPTION_DEBUG:-0}
+DEBUG_LOG="/tmp/mermaid_debug.log"
+TEMP_DIR="/tmp/mermaid"
+MMDC_PATH="/Users/xin/.nvm/versions/node/v24.11.0/bin/mmdc"
+
+# ============
+# 函数定义
+# ============
+
+# 调试日志函数
+debug_log() {
+    if [ "$DEBUG_MODE" != "0" ]; then
+        echo "[$(date '+%H:%M:%S')] $1" >> "$DEBUG_LOG"
+    fi
+}
+
+# 检测 Mermaid 图表类型
+detect_chart_type() {
+    CHART_TYPE="chart"
+    case "$MERMAID_CODE" in
+        sequenceDiagram*) CHART_TYPE="sequenceDiagram" ;;
+        classDiagram*)    CHART_TYPE="classDiagram" ;;
+        stateDiagram*)    CHART_TYPE="stateDiagram" ;;
+        gantt*)           CHART_TYPE="gantt" ;;
+        pie*)             CHART_TYPE="pie" ;;
+        gitgraph*)        CHART_TYPE="gitgraph" ;;
+        erDiagram*)       CHART_TYPE="erDiagram" ;;
+        journey*)         CHART_TYPE="journey" ;;
+        flowchart*)       CHART_TYPE="flowchart" ;;
+        graph*)           CHART_TYPE="graph" ;;
+    esac
+    debug_log "Chart type detected: $CHART_TYPE"
+}
+
+# 显示错误信息并退出
+show_error_and_exit() {
+    local error_msg="$1"
+    debug_log "ERROR: $error_msg"
+    if [ "$DEBUG_MODE" != "0" ]; then
+        echo "❌ $error_msg"
+        echo "Debug log: $DEBUG_LOG"
+    else
+        echo "Error: $error_msg"
+    fi
+    exit 1
+}
+
+# ============
+# 主要执行流程
+# ============
+
+# 初始化调试日志
+if [ "$DEBUG_MODE" != "0" ]; then
+    echo "=== PopClip Mermaid Debug Log ===" > "$DEBUG_LOG"
+    echo "Time: $(date)" >> "$DEBUG_LOG"
+    echo "Debug Mode: Enabled" >> "$DEBUG_LOG"
+fi
+debug_log "Debug Mode: $DEBUG_MODE"
+
+# 获取输入数据
+MERMAID_CODE="${POPCLIP_TEXT}"
+debug_log "Selected text length: ${#MERMAID_CODE}"
+debug_log "First 50 chars: ${MERMAID_CODE:0:50}"
+
+# 验证输入
+if [ -z "$MERMAID_CODE" ]; then
+    show_error_and_exit "No text selected"
+fi
+
+# 创建工作目录
+mkdir -p "$TEMP_DIR"
+debug_log "Directory created: $TEMP_DIR"
+
+# 检测图表类型
+detect_chart_type
+
+# 生成时间戳和文件名
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+debug_log "Timestamp: $TIMESTAMP"
+debug_log "MMDC path: $MMDC_PATH"
+
+FILENAME_BASE="${TIMESTAMP}_${CHART_TYPE}"
+TEMP_MMD_FILE="$TEMP_DIR/${FILENAME_BASE}.mmd"
+TEMP_PNG_FILE="$TEMP_DIR/${FILENAME_BASE}.png"
+debug_log "MMD file: $TEMP_MMD_FILE"
+debug_log "PNG file: $TEMP_PNG_FILE"
+
+# 写入 Mermaid 代码到临时文件
+echo "$MERMAID_CODE" > "$TEMP_MMD_FILE"
+debug_log "Mermaid code written to file"
+debug_log "File size: $(wc -c < "$TEMP_MMD_FILE" 2>/dev/null || echo "0") bytes"
+
+# ============
+# 渲染处理
+# ============
+
+# 检查 mmdc 工具是否存在
+if [ ! -x "$MMDC_PATH" ]; then
+    show_error_and_exit "mmdc not found at $MMDC_PATH"
+fi
+debug_log "mmdc found and executable"
+
+# 执行渲染
+debug_log "Starting rendering..."
+RENDER_CMD="$MMDC_PATH -i \"$TEMP_MMD_FILE\" -o \"$TEMP_PNG_FILE\" -t neutral -b white"
+
+if [ "$DEBUG_MODE" != "0" ]; then
+    eval "$RENDER_CMD" 2>> "$DEBUG_LOG" && RENDER_SUCCESS=true || RENDER_SUCCESS=false
+else
+    eval "$RENDER_CMD" 2>/dev/null && RENDER_SUCCESS=true || RENDER_SUCCESS=false
+fi
+
+# ============
+# 结果处理
+# ============
+
+if [ "$RENDER_SUCCESS" = "true" ]; then
+    debug_log "✅ Rendering successful"
+    debug_log "PNG file size: $(wc -c < "$TEMP_PNG_FILE" 2>/dev/null || echo "0") bytes"
+
+    # 打开预览
+    if command -v open &> /dev/null; then
+        debug_log "Opening preview..."
+        if [ "$DEBUG_MODE" != "0" ]; then
+            open "$TEMP_PNG_FILE" 2>> "$DEBUG_LOG"
+        else
+            open "$TEMP_PNG_FILE" 2>/dev/null
+        fi
+        debug_log "✅ Preview opened"
+
+        # 显示成功信息
+        if [ "$DEBUG_MODE" != "0" ]; then
+            echo "✅ Success: ${FILENAME_BASE}.png"
+            echo "Debug log: $DEBUG_LOG"
+        else
+            echo "✅ Mermaid diagram rendered: ${FILENAME_BASE}.png"
+        fi
+    else
+        show_error_and_exit "Cannot open image preview on this system"
+    fi
+else
+    show_error_and_exit "Failed to render Mermaid diagram"
+fi
+
+debug_log "=== Script Complete ==="
