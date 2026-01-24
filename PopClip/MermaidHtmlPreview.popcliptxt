@@ -1,0 +1,43 @@
+# popclip
+name: Mermaid Live
+icon: circle M
+interpreter: zsh
+regex: '(?i)^\s*(graph|flowchart|classDiagram|sequenceDiagram|stateDiagram|erDiagram|gantt|pie|mindmap|journey|gitgraph|C4Context|timeline)[\s\S]*'
+options:
+  - identifier: hostname
+    label: Mermaid Editor URL
+    type: string
+    default value: https://mermaid.live/edit
+
+shell script: |
+  NODE_PATH="/Users/xin/.nvm/versions/node/v24.11.0/bin/node"
+  PAKO_DIR="/Users/xin/Documents/CodeSnippets"
+  EDITOR_URL="${POPCLIP_OPTION_HOSTNAME:-https://mermaid.live/edit}"
+
+  TEMP_FILE=$(mktemp)
+  echo "$POPCLIP_TEXT" > "$TEMP_FILE"
+
+  RESULT=$("$NODE_PATH" -e "
+    const pako = require('$PAKO_DIR/node_modules/pako');
+    const fs = require('fs');
+    const text = fs.readFileSync('$TEMP_FILE', 'utf8').trim();
+    const config = { code: text, mermaid: { theme: 'default' } };
+    const json = JSON.stringify(config);
+    const compressed = pako.deflate(Buffer.from(json, 'utf8'), { level: 9 });
+    const base64 = Buffer.from(compressed).toString('base64')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=/g, '');
+    
+    let baseUrl = '$EDITOR_URL';
+    if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
+    process.stdout.write(baseUrl + '#pako:' + base64);
+  ")
+
+  rm -f "$TEMP_FILE"
+
+  if [ -z "$RESULT" ]; then
+    exit 1
+  else
+    open "$RESULT"
+  fi
