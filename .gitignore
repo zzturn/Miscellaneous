@@ -1,1 +1,4 @@
 .DS_Store
+.claude-alert-off
+.playwright-mcp/
+*.png
