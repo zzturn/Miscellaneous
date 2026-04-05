@@ -12,8 +12,8 @@
     {
       "description": "⌨ Hyper: 激活",
       "manipulators": [
-        {"description": "CapsLock: 双击切换大写","type": "basic","from": {"key_code": "caps_lock","modifiers": {"optional": ["any"]}},"to": [{"key_code": "caps_lock","hold_down_milliseconds": 200},{"set_variable": {"name": "capslock_expiration","value": 0}}],"conditions": [{"type": "expression_if","expression": "capslock_expiration > system.now.milliseconds"}]},
-        {"description": "CapsLock: 按住激活，单击 Esc","type": "basic","from": {"key_code": "caps_lock","modifiers": {"optional": ["any"]}},"to": [{"set_variable": {"name": "capslock_expiration","expression": "system.now.milliseconds + 300"}},{"set_variable": {"name": "hyper_on","value": 1,"key_up_value": 0}}],"to_if_alone": [{"key_code": "escape"}]}
+        {"description": "CapsLock: 双击切换大写","type": "basic","from": {"key_code": "caps_lock","modifiers": {"optional": ["any"]}},"to": [{"key_code": "caps_lock","hold_down_milliseconds": 200},{"set_variable": {"name": "capslock_expiration","value": 0}},{"set_variable": {"name": "capslock_double_tap","value": 1}}],"conditions": [{"type": "expression_if","expression": "capslock_expiration > system.now.milliseconds"}]},
+        {"description": "CapsLock: 按住激活，单击 Esc","type": "basic","from": {"key_code": "caps_lock","modifiers": {"optional": ["any"]}},"to": [{"set_variable": {"name": "capslock_expiration","expression": "system.now.milliseconds + 300"}},{"set_variable": {"name": "hyper_on","value": 1,"key_up_value": 0}},{"set_variable": {"name": "capslock_double_tap","value": 0}}],"to_delayed_action": {"to_if_invoked": [{"key_code": "escape","conditions": [{"type": "expression_if","expression": "capslock_double_tap == 0"}]}],"to_if_canceled": []},"parameters": {"basic.to_delayed_action_delay_milliseconds": 300}}
       ]
     },
     {
