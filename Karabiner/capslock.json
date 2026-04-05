@@ -2,7 +2,7 @@
   "title": "Capslock Enhancement",
   "url": "https://github.com/zzturn/Miscellaneous/raw/master/Karabiner/capslock.json",
   "fork_from": "https://vonng.com/capslock.json",
-  "version": "20250719",
+  "version": "20260405",
   "maintainers": ["zzturn"],
   "author": "zzturn",
   "json_url": "https://github.com/zzturn/Miscellaneous/raw/master/Karabiner/capslock.json",
@@ -86,7 +86,7 @@
     {
       "description": "⚡ Hyper: 应用",
       "manipulators": [
-        {"description": "Hyper + Z: 切回上一个应用","type": "basic","from": {"key_code": "z"},"to": [{"key_code": "tab","modifiers": ["left_command"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
+        {"description": "Hyper + Z: 切回上一个应用","type": "basic","from": {"key_code": "z"},"to": [{"software_function": {"open_application": {"frontmost_application_history_index": 1}}}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + Q: 活动监视器","type": "basic","from": {"key_code": "q"},"to": [{"software_function": {"open_application": {"bundle_identifier": "com.apple.ActivityMonitor"}},"conditions": [{"type": "frontmost_application_unless","bundle_identifiers": ["com.apple.ActivityMonitor"]}]},{"key_code": "h","modifiers": ["left_command"],"conditions": [{"type": "frontmost_application_if","bundle_identifiers": ["com.apple.ActivityMonitor"]}]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + ⌘Q: 系统设置","type": "basic","from": {"key_code": "q","modifiers": {"mandatory": ["command"]}},"to": [{"software_function": {"open_application": {"bundle_identifier": "com.apple.systempreferences"}},"conditions": [{"type": "frontmost_application_unless","bundle_identifiers": ["com.apple.systempreferences"]}]},{"key_code": "h","modifiers": ["left_command"],"conditions": [{"type": "frontmost_application_if","bundle_identifiers": ["com.apple.systempreferences"]}]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
 
