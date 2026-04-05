@@ -10,14 +10,14 @@
   "repo": "https://github.com/zzturn/Miscellaneous/Karabiner",
   "rules": [
     {
-      "description": "⌨ Hyper: 激活",
+      "description": "🔑 Hyper: 激活",
       "manipulators": [
         {"description": "CapsLock: 双击切换大写","type": "basic","from": {"key_code": "caps_lock","modifiers": {"optional": ["any"]}},"to": [{"key_code": "caps_lock","hold_down_milliseconds": 200},{"set_variable": {"name": "capslock_expiration","value": 0}}],"conditions": [{"type": "expression_if","expression": "capslock_expiration > system.now.milliseconds"}]},
         {"description": "CapsLock: 按住激活Hyper，单击Esc","type": "basic","from": {"key_code": "caps_lock","modifiers": {"optional": ["any"]}},"to": [{"set_variable": {"name": "capslock_expiration","expression": "system.now.milliseconds + 300"}},{"set_variable": {"name": "hyper_on","value": 1}}],"to_after_key_up": [{"set_variable": {"name": "hyper_on","value": 0}}],"to_delayed_action": {"to_if_invoked": [{"key_code": "escape","conditions": [{"type": "variable_unless","name": "hyper_on","value": 1}]}],"to_if_canceled": []},"parameters": {"basic.to_delayed_action_delay_milliseconds": 300}}
       ]
     },
     {
-      "description": "⬆ Hyper: 基本导航",
+      "description": "⬆️ Hyper: 基本导航",
       "manipulators": [
         {"description": "Hyper + H: 左","type": "basic","from": {"key_code": "h"},"to": [{"key_code": "left_arrow"}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + L: 右","type": "basic","from": {"key_code": "l"},"to": [{"key_code": "right_arrow"}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
@@ -30,7 +30,7 @@
       ]
     },
     {
-      "description": "⬆ Hyper: 按词导航",
+      "description": "⬆️ Hyper: 按词导航",
       "manipulators": [
         {"description": "Hyper + ⌥H: 按词左","type": "basic","from": {"key_code": "h","modifiers": {"mandatory": ["option"]}},"to": [{"key_code": "left_arrow","modifiers": ["left_option"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + ⌥L: 按词右","type": "basic","from": {"key_code": "l","modifiers": {"mandatory": ["option"]}},"to": [{"key_code": "right_arrow","modifiers": ["left_option"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
@@ -39,7 +39,7 @@
       ]
     },
     {
-      "description": "✦ Hyper: 选中",
+      "description": "✴️ Hyper: 选中",
       "manipulators": [
         {"description": "Hyper + ⇧H: 选左","type": "basic","from": {"key_code": "h","modifiers": {"mandatory": ["shift"]}},"to": [{"key_code": "left_arrow","modifiers": ["left_shift"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + ⇧L: 选右","type": "basic","from": {"key_code": "l","modifiers": {"mandatory": ["shift"]}},"to": [{"key_code": "right_arrow","modifiers": ["left_shift"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "description": "⌫ Hyper: 删除",
+      "description": "🗑️ Hyper: 删除",
       "manipulators": [
         {"description": "Hyper + M: 删前","type": "basic","from": {"key_code": "m"},"to": [{"key_code": "delete_or_backspace"}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + ,: 删后","type": "basic","from": {"key_code": "comma"},"to": [{"key_code": "delete_forward"}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
@@ -64,7 +64,7 @@
       ]
     },
     {
-      "description": "⌨ Hyper: 输入法",
+      "description": "🌐 Hyper: 输入法",
       "manipulators": [
         {"description": "Hyper + Space: 输入法","type": "basic","from": {"key_code": "spacebar"},"to": [{"key_code": "spacebar","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + ⌘Space: 表情","type": "basic","from": {"key_code": "spacebar","modifiers": {"mandatory": ["command"]}},"to": [{"key_code": "spacebar","modifiers": ["left_control","left_command"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "description": "⊞ Hyper: 窗口",
+      "description": "🔲 Hyper: 窗口",
       "manipulators": [
         {"description": "Hyper + A: Dock","type": "basic","from": {"key_code": "a"},"to": [{"key_code": "d","modifiers": ["left_option","left_command"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + ⌘A: Expose","type": "basic","from": {"key_code": "a","modifiers": {"mandatory": ["command"]}},"to": [{"key_code": "up_arrow","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
