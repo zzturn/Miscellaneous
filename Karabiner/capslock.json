@@ -17,15 +17,6 @@
       ]
     },
     {
-      "description": "⬆ Hyper: iTerm2基本导航",
-      "manipulators": [
-        {"description": "Hyper + H: 左 [iTerm2]","type": "basic","from": {"key_code": "h"},"to": [{"key_code": "b","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
-        {"description": "Hyper + L: 右 [iTerm2]","type": "basic","from": {"key_code": "l"},"to": [{"key_code": "f","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
-        {"description": "Hyper + I: 行首 [iTerm2]","type": "basic","from": {"key_code": "i"},"to": [{"key_code": "a","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
-        {"description": "Hyper + O: 行尾 [iTerm2]","type": "basic","from": {"key_code": "o"},"to": [{"key_code": "e","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]}
-      ]
-    },
-    {
       "description": "⬆ Hyper: 基本导航",
       "manipulators": [
         {"description": "Hyper + H: 左","type": "basic","from": {"key_code": "h"},"to": [{"key_code": "left_arrow"}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
@@ -36,13 +27,6 @@
         {"description": "Hyper + O: 行尾","type": "basic","from": {"key_code": "o"},"to": [{"key_code": "right_arrow","modifiers": ["left_command"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + U: 上翻页","type": "basic","from": {"key_code": "u"},"to": [{"key_code": "page_up"}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + P: 下翻页","type": "basic","from": {"key_code": "p"},"to": [{"key_code": "page_down"}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]}
-      ]
-    },
-    {
-      "description": "⬆ Hyper: iTerm2按词导航",
-      "manipulators": [
-        {"description": "Hyper + ⌥H: 按词左 [iTerm2]","type": "basic","from": {"key_code": "h","modifiers": {"mandatory": ["option"]}},"to": [{"key_code": "b","modifiers": ["left_option"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
-        {"description": "Hyper + ⌥L: 按词右 [iTerm2]","type": "basic","from": {"key_code": "l","modifiers": {"mandatory": ["option"]}},"to": [{"key_code": "f","modifiers": ["left_option"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]}
       ]
     },
     {
@@ -66,15 +50,6 @@
         {"description": "Hyper + ⇧⌥L: 按词选右","type": "basic","from": {"key_code": "l","modifiers": {"mandatory": ["shift","option"]}},"to": [{"key_code": "right_arrow","modifiers": ["left_option","left_shift"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + ⇧⌥J: 选下×3","type": "basic","from": {"key_code": "j","modifiers": {"mandatory": ["shift","option"]}},"to": [{"key_code": "down_arrow","modifiers": ["left_shift"]},{"key_code": "down_arrow","modifiers": ["left_shift"]},{"key_code": "down_arrow","modifiers": ["left_shift"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]},
         {"description": "Hyper + ⇧⌥K: 选上×3","type": "basic","from": {"key_code": "k","modifiers": {"mandatory": ["shift","option"]}},"to": [{"key_code": "up_arrow","modifiers": ["left_shift"]},{"key_code": "up_arrow","modifiers": ["left_shift"]},{"key_code": "up_arrow","modifiers": ["left_shift"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1}]}
-      ]
-    },
-    {
-      "description": "⌫ Hyper: iTerm2删除",
-      "manipulators": [
-        {"description": "Hyper + N: 删前词 [iTerm2]","type": "basic","from": {"key_code": "n"},"to": [{"key_code": "w","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
-        {"description": "Hyper + .: 删后词 [iTerm2]","type": "basic","from": {"key_code": "period"},"to": [{"key_code": "d","modifiers": ["left_option"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
-        {"description": "Hyper + ⌘N: 删至行首 [iTerm2]","type": "basic","from": {"key_code": "n","modifiers": {"mandatory": ["command"]}},"to": [{"key_code": "u","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
-        {"description": "Hyper + ⌘.: 删至行尾 [iTerm2]","type": "basic","from": {"key_code": "period","modifiers": {"mandatory": ["command"]}},"to": [{"key_code": "k","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]}
       ]
     },
     {

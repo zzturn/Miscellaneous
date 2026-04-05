@@ -1,0 +1,37 @@
+{
+  "title": "Capslock Enhancement: iTerm2",
+  "url": "https://github.com/zzturn/Miscellaneous/raw/master/Karabiner/iterm2.json",
+  "version": "20250719",
+  "maintainers": ["zzturn"],
+  "author": "zzturn",
+  "json_url": "https://github.com/zzturn/Miscellaneous/raw/master/Karabiner/iterm2.json",
+  "import_url": "karabiner://karabiner/assets/complex_modifications/import?url=https://github.com/zzturn/Miscellaneous/raw/master/Karabiner/iterm2.json",
+  "repo": "https://github.com/zzturn/Miscellaneous/Karabiner",
+  "rules": [
+    {
+      "description": "⬆ Hyper: iTerm2基本导航",
+      "manipulators": [
+        {"description": "Hyper + H: 左 [iTerm2]","type": "basic","from": {"key_code": "h"},"to": [{"key_code": "b","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
+        {"description": "Hyper + L: 右 [iTerm2]","type": "basic","from": {"key_code": "l"},"to": [{"key_code": "f","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
+        {"description": "Hyper + I: 行首 [iTerm2]","type": "basic","from": {"key_code": "i"},"to": [{"key_code": "a","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
+        {"description": "Hyper + O: 行尾 [iTerm2]","type": "basic","from": {"key_code": "o"},"to": [{"key_code": "e","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]}
+      ]
+    },
+    {
+      "description": "⬆ Hyper: iTerm2按词导航",
+      "manipulators": [
+        {"description": "Hyper + ⌥H: 按词左 [iTerm2]","type": "basic","from": {"key_code": "h","modifiers": {"mandatory": ["option"]}},"to": [{"key_code": "b","modifiers": ["left_option"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
+        {"description": "Hyper + ⌥L: 按词右 [iTerm2]","type": "basic","from": {"key_code": "l","modifiers": {"mandatory": ["option"]}},"to": [{"key_code": "f","modifiers": ["left_option"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]}
+      ]
+    },
+    {
+      "description": "⌫ Hyper: iTerm2删除",
+      "manipulators": [
+        {"description": "Hyper + N: 删前词 [iTerm2]","type": "basic","from": {"key_code": "n"},"to": [{"key_code": "w","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
+        {"description": "Hyper + .: 删后词 [iTerm2]","type": "basic","from": {"key_code": "period"},"to": [{"key_code": "d","modifiers": ["left_option"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
+        {"description": "Hyper + ⌘N: 删至行首 [iTerm2]","type": "basic","from": {"key_code": "n","modifiers": {"mandatory": ["command"]}},"to": [{"key_code": "u","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]},
+        {"description": "Hyper + ⌘.: 删至行尾 [iTerm2]","type": "basic","from": {"key_code": "period","modifiers": {"mandatory": ["command"]}},"to": [{"key_code": "k","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.googlecode.iterm","com.apple.Terminal"]}]}
+      ]
+    }
+  ]
+}
