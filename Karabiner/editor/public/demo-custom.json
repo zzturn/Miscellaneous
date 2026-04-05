@@ -1,0 +1,290 @@
+{
+    "title": "Personal custom config",
+    "rules": [
+        {
+            "description": "Custom: Change tab + m,.jkluoi to 1234567890",
+            "manipulators": [
+                {
+                    "type":"basic",
+                    "from":{"key_code":"tab"},
+                    "to":[{"set_variable":{"name":"tab_pressed","value":1},"repeat":false}],
+                    "to_if_alone":[{"key_code":"tab"}],
+                    "to_if_held_down":[{"set_variable":{"name":"tab_pressed","value":1}}],
+                    "to_after_key_up":[{"set_variable":{"name":"tab_pressed","value":0}}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code":"o"},
+                    "to":[{"key_code":"9"}],
+                    "conditions":[{"type":"variable_if","name":"tab_pressed","value":1}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code":"i"},
+                    "to":[{"key_code":"8"}],
+                    "conditions":[{"type":"variable_if","name":"tab_pressed","value":1}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code":"u"},
+                    "to":[{"key_code":"7"}],
+                    "conditions":[{"type":"variable_if","name":"tab_pressed","value":1}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code":"l"},
+                    "to":[{"key_code":"6"}],
+                    "conditions":[{"type":"variable_if","name":"tab_pressed","value":1}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code":"k"},
+                    "to":[{"key_code":"5"}],
+                    "conditions":[{"type":"variable_if","name":"tab_pressed","value":1}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code":"j"},
+                    "to":[{"key_code":"4"}],
+                    "conditions":[{"type":"variable_if","name":"tab_pressed","value":1}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code":"period"},
+                    "to":[{"key_code":"3"}],
+                    "conditions":[{"type":"variable_if","name":"tab_pressed","value":1}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code":"comma"},
+                    "to":[{"key_code":"2"}],
+                    "conditions":[{"type":"variable_if","name":"tab_pressed","value":1}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code":"m"},
+                    "to":[{"key_code":"1"}],
+                    "conditions":[{"type":"variable_if","name":"tab_pressed","value":1}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code":"spacebar"},
+                    "to":[{"key_code":"0"}],
+                    "conditions":[{"type":"variable_if","name":"tab_pressed","value":1}]
+                }
+            ]
+        },
+        {
+            "description": "Custom: Double ⌘+q to quit",
+            "manipulators": [
+                {
+                    "type":"basic",
+                    "conditions":[{"type":"variable_if","name":"command-q","value":1}],
+                    "from":{"key_code":"q","modifiers":{"mandatory":["command"],"optional":["caps_lock"]}},
+                    "to":[{"key_code":"q","modifiers":"left_command"}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code":"q","modifiers":{"mandatory":["command"],"optional":["caps_lock"]}},
+                    "to":[{"set_variable":{"name":"command-q","value":1}}],
+                    "to_delayed_action":{"to_if_invoked":[{"set_variable":{"name":"command-q","value":0}}],"to_if_canceled":[{"set_variable":{"name":"command-q","value":0}}]},
+                    "parameters":{"basic.to_delayed_action_delay_milliseconds":1000}
+                }
+            ]
+        },
+        {
+            "description": "Custom: Enable mouse back, forward in Finder, Safari",
+            "manipulators": [
+                {
+                    "type":"basic",
+                    "from":{"pointing_button":"button5"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.apple.Safari","com.apple.finder"]}],
+                    "to":[{"repeat":true,"key_code":"close_bracket","modifiers":["left_gui"]}]
+                },
+                {
+                    "type":"basic",
+                    "from":{"pointing_button":"button4"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.apple.Safari","com.apple.finder"]}],
+                    "to":[{"repeat":true,"key_code":"open_bracket","modifiers":["left_gui"]}]
+                }
+            ]
+        },
+        {
+            "description": "Custom: Enable mouse button3 to open parent folder in Finder",
+            "manipulators": [
+                {
+                    "type":"basic",
+                    "from":{"pointing_button":"button3"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.apple.finder"]}],
+                    "to":[{"repeat":true,"key_code":"up_arrow","modifiers":["left_command"]}]
+                }
+            ]
+        },
+        {
+            "description": "Custom: Enable mouse button3 to close current tab in Safari, Chrome",
+            "manipulators": [
+                {
+                    "type":"basic",
+                    "from":{"pointing_button":"button3"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.apple.Safari","com.google.Chrome"]}],
+                    "to":[{"pointing_button":"button1"},{"shell_command":"/bin/zsh $HOME/.script/close_tab.sh","description":"请注意去掉所有slash, Command: osascript -e 'tell application \"System Events\"' -e 'set frontmostProcess to first application process whose frontmost is true' -e 'set frontmostProcessBundleId to bundle identifier of frontmostProcess' -e 'if frontmostProcessBundleId is \"com.google.Chrome\" then' -e 'tell application id \"com.google.Chrome\" to close active tab of front window' -e 'else if frontmostProcessBundleId is \"com.apple.Safari\" then' -e 'tell application id \"com.apple.Safari\" to close current tab of front window' -e 'end if' -e 'end tell'"}]
+                }
+            ]
+        },
+        {
+            "description": "Custom: Enable mouse button1+button2 to open url switch Safari, Chrome",
+            "manipulators": [
+                {
+                    "type":"basic",
+                    "from":{"simultaneous":[{"pointing_button":"button1"},{"pointing_button":"button2"}]},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.apple.Safari","com.google.Chrome"]}],
+                    "to":[{"shell_command":"zsh $HOME/.script/open_in_browser.sh"}]
+                }
+            ]
+        },
+        {
+            "description": "Custom: Map delete to command+backspace to delete file in Finder",
+            "manipulators": [
+                {
+                    "type":"basic",
+                    "from":{"key_code":"delete_forward"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.apple.finder"]}],
+                    "to":[{"repeat":true,"key_code":"delete_or_backspace","modifiers":["left_gui"]}]
+                }
+            ]
+        },
+        {
+            "description": "Custom: Map f12 to open dev tools in Safari",
+            "manipulators": [
+                {
+                    "type":"basic",
+                    "from":{"key_code":"f12"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.apple.Safari"]}],
+                    "to":[{"repeat":true,"key_code":"i","modifiers":["left_command", "left_option"]}]
+                }
+            ]
+        },
+        {
+            "description": "Custom: Map ctrl+space to shift in rime",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "modifiers": {
+                            "mandatory": [
+                                "left_control"
+                            ]
+                        },
+                        "key_code": "spacebar"
+                    },
+                    "conditions": [{"type": "input_source_if", "input_sources": [{"language":"zh-Hans"}]}],
+                    "to": [
+                        {
+                            "key_code": "left_shift"
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "modifiers": {
+                            "mandatory": [
+                                "left_control"
+                            ]
+                        },
+                        "key_code": "spacebar"
+                    },
+                    "to": [
+                        {
+                            "select_input_source": {
+                                "language": "zh-Hans"
+                            }
+                        }
+                    ],
+                    "conditions": [{"type": "input_source_if", "input_sources": [{"language":"en"}]}]
+                }
+            ]
+        },
+        {
+            "description": "Custom: Enable map up, left, down, right, delete, end, page_down, f3, f18, f19 to f,1,2,3,4,5,6,p,m, shift+3 in dst",
+            "manipulators": [
+                {
+                    "type":"basic",
+                    "from":{"key_code": "up_arrow", "modifiers": {"optional": ["right_control", "left_command", "left_control"]}},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to":{"key_code": "f"}
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code": "left_arrow", "modifiers": {"optional": ["right_control"]}},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to":{"key_code": "1"}
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code": "down_arrow", "modifiers": {"optional": ["right_control"]}},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to":{"key_code": "2"}
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code": "right_arrow", "modifiers": {"optional": ["right_control"]}},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to":{"key_code": "3"}
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code": "delete_forward", "modifiers": {"optional": ["right_control"]}},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to":{"key_code": "4"}
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code": "end", "modifiers": {"optional": ["right_control"]}},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to":{"key_code": "5"}
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code": "page_down", "modifiers": {"optional": ["right_control"]}},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to":{"key_code": "6"}
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code": "f19"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to": [
+                        {
+                            "key_code": "left_shift",
+                            "hold_down_milliseconds": 200
+                        },
+                        {
+                            "key_code": "3"
+                        }
+                    ]
+                },
+                {
+                    "type":"basic",
+                    "from":{"key_code": "f18"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to": [
+                        {
+                            "key_code": "m"
+                        }
+                    ]
+                },
+                {
+                    "type":"basic",
+                    "from":{"pointing_button":"button3"},
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
+                    "to": [
+                        {
+                            "key_code": "p"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]    
+}
