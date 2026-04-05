@@ -1,0 +1,18 @@
+{
+  "title": "Capslock Enhancement: Safari",
+  "url": "https://github.com/zzturn/Miscellaneous/raw/master/Karabiner/safari.json",
+  "version": "20260405",
+  "maintainers": ["zzturn"],
+  "author": "zzturn",
+  "json_url": "https://github.com/zzturn/Miscellaneous/raw/master/Karabiner/safari.json",
+  "import_url": "karabiner://karabiner/assets/complex_modification/import?url=https://github.com/zzturn/Miscellaneous/raw/master/Karabiner/safari.json",
+  "repo": "https://github.com/zzturn/Miscellaneous/Karabiner",
+  "rules": [
+    {
+      "description": "🌐 Safari: 快捷键增强",
+      "manipulators": [
+        {"description": "⇧⌘R: 强制刷新 [Safari]","type": "basic","from": {"key_code": "r","modifiers": {"mandatory": ["left_shift","left_command"]}},"to": [{"key_code": "e","modifiers": ["left_command","left_option"]},{"key_code": "r","modifiers": ["left_command"]}],"conditions": [{"type": "frontmost_application_if","bundle_identifiers": ["com.apple.Safari"]}]}
+      ]
+    }
+  ]
+}
