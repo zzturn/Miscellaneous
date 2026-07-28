@@ -126,8 +126,8 @@
                 {
                     "type":"basic",
                     "from":{"pointing_button":"button3"},
-                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.apple.Safari","com.google.Chrome"]}],
-                    "to":[{"pointing_button":"button1"},{"shell_command":"/bin/zsh $HOME/.script/close_tab.sh","description":"请注意去掉所有slash, Command: osascript -e 'tell application \"System Events\"' -e 'set frontmostProcess to first application process whose frontmost is true' -e 'set frontmostProcessBundleId to bundle identifier of frontmostProcess' -e 'if frontmostProcessBundleId is \"com.google.Chrome\" then' -e 'tell application id \"com.google.Chrome\" to close active tab of front window' -e 'else if frontmostProcessBundleId is \"com.apple.Safari\" then' -e 'tell application id \"com.apple.Safari\" to close current tab of front window' -e 'end if' -e 'end tell'"}]
+                    "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.google.Chrome","com.apple.Safari"]}],
+                    "to":[{"key_code":"w","modifiers":["left_command"]}]
                 }
             ]
         },
@@ -252,7 +252,7 @@
                 },
                 {
                     "type":"basic",
-                    "from":{"key_code": "f19"},
+                    "from":{"key_code": "f20"},
                     "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
                     "to": [
                         {
@@ -276,7 +276,7 @@
                 },
                 {
                     "type":"basic",
-                    "from":{"pointing_button":"button3"},
+                    "from":{"key_code": "f19"},
                     "conditions":[{"type":"frontmost_application_if","bundle_identifiers":["com.Klei.Dontstarve"]}],
                     "to": [
                         {

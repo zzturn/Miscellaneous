@@ -11,7 +11,7 @@
     {
       "description": "🌐 Safari: 快捷键增强",
       "manipulators": [
-        {"description": "⇧⌘R: 强制刷新 [Safari]","type": "basic","from": {"key_code": "r","modifiers": {"mandatory": ["left_shift","left_command"]}},"to": [{"key_code": "e","modifiers": ["left_command","left_option"]},{"key_code": "r","modifiers": ["left_command"]}],"conditions": [{"type": "frontmost_application_if","bundle_identifiers": ["com.apple.Safari"]}]}
+        {"description": "⇧⌘R: 强制刷新 [Safari]","type": "basic","from": {"key_code": "r","modifiers": {"mandatory": ["left_shift","left_command"]}},"to": [{"key_code": "r","modifiers": ["left_command","left_option"]}],"conditions": [{"type": "frontmost_application_if","bundle_identifiers": ["com.apple.Safari"]}]}
       ]
     }
   ]
