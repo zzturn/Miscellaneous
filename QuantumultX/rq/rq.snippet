@@ -1,10 +1,12 @@
 # module = RQ Mod
-# desc=修改 RQ 的 VIP 状态
+# desc=修改 RQ 的 VIP 状态并恢复最佳体能页面数据渲染
 # author = 𝙯𝙯𝙩𝙪𝙧𝙣
 # url = https://github.com/zzturn/Miscellaneous/raw/master/QuantumultX/rq/rq.snippet
 
 
 ^https:\/\/www\.rq\.run\/user(?:\/record\/info\?id=\d+.*|$) url response-body const VIP\s*=\s*([^;]+); response-body const VIP = 1;
 ^https:\/\/api\.rq\.run\/Api\/\w+\/\w+(?:\?.*)?$ url script-response-body https://github.com/zzturn/Miscellaneous/raw/master/QuantumultX/rq/rq.js
+^https:\/\/www\.rq\.run\/User\/Training\/best_fitness(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/zzturn/Miscellaneous/master/QuantumultX/rq/rq-page.js
+^https:\/\/www\.rq\.run\/dc\/api(?:\?.*)?$ url script-request-header https://raw.githubusercontent.com/zzturn/Miscellaneous/master/QuantumultX/rq/rq-page.js
 
 hostname = *.rq.run
