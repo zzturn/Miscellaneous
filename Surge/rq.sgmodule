@@ -1,12 +1,11 @@
 #!name=RQ Mod
-#!desc=将 RQ 的响应转换为 VIP 状态（Surge）
+#!desc=将 RQ 页面恢复为正常数据渲染并转换 API VIP 状态（Surge）
 #!requirement=CORE_VERSION>=20
-
-[Body Rewrite]
-http-response ^https:\/\/www\.rq\.run\/user(?:\/record\/info\?id=\d+.*|$) const\s+VIP\s*=\s*([^;]+); const VIP=1;
 
 [Script]
 rq-api-vip = type=http-response,pattern=^https:\/\/api\.rq\.run\/Api\/\w+\/\w+(?:\?.*)?$,requires-body=true,max-size=-1,script-path=https://raw.githubusercontent.com/zzturn/Miscellaneous/master/Surge/rq.js
+rq-best-fitness-page = type=http-response,pattern=^https:\/\/www\.rq\.run\/User\/Training\/best_fitness(?:\?.*)?$,requires-body=true,max-size=-1,script-path=https://raw.githubusercontent.com/zzturn/Miscellaneous/master/Surge/rq-page.js
+rq-best-fitness-api = type=http-request,pattern=^https:\/\/www\.rq\.run\/dc\/api(?:\?.*)?$,script-path=https://raw.githubusercontent.com/zzturn/Miscellaneous/master/Surge/rq-page.js
 
 [MITM]
 hostname = %APPEND% *.rq.run
