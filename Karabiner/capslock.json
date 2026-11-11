@@ -2,7 +2,7 @@
   "title": "Capslock Enhancement",
   "url": "https://github.com/zzturn/Miscellaneous/raw/master/Karabiner/capslock.json",
   "fork_from": "https://vonng.com/capslock.json",
-  "version": "20260405",
+  "version": "20260824",
   "maintainers": ["zzturn"],
   "author": "zzturn",
   "json_url": "https://github.com/zzturn/Miscellaneous/raw/master/Karabiner/capslock.json",
@@ -14,6 +14,21 @@
       "manipulators": [
         {"description": "CapsLock: 双击切换大写","type": "basic","from": {"key_code": "caps_lock","modifiers": {"optional": ["any"]}},"to": [{"key_code": "caps_lock","hold_down_milliseconds": 200},{"set_variable": {"name": "capslock_expiration","value": 0}}],"conditions": [{"type": "expression_if","expression": "capslock_expiration > system.now.milliseconds"}]},
         {"description": "CapsLock: 按住激活Hyper，单击Esc","type": "basic","from": {"key_code": "caps_lock","modifiers": {"optional": ["any"]}},"to": [{"set_variable": {"name": "capslock_expiration","expression": "system.now.milliseconds + 300"}},{"set_variable": {"name": "hyper_on","value": 1}}],"to_after_key_up": [{"set_variable": {"name": "hyper_on","value": 0}}],"to_delayed_action": {"to_if_invoked": [{"key_code": "escape","conditions": [{"type": "variable_unless","name": "hyper_on","value": 1}]}],"to_if_canceled": []},"parameters": {"basic.to_delayed_action_delay_milliseconds": 300}}
+      ]
+    },
+    {
+      "description": "⬆️ Parallels: Hyper 导航适配 Windows",
+      "manipulators": [
+        {"description": "Parallels: Hyper + I: 行首 (Home)","type": "basic","from": {"key_code": "i"},"to": [{"key_code": "home"}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.parallels.desktop.console"]}]},
+        {"description": "Parallels: Hyper + O: 行尾 (End)","type": "basic","from": {"key_code": "o"},"to": [{"key_code": "end"}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.parallels.desktop.console"]}]},
+        {"description": "Parallels: Hyper + ⌥H: 按词左 (Ctrl+←)","type": "basic","from": {"key_code": "h","modifiers": {"mandatory": ["option"]}},"to": [{"key_code": "left_arrow","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.parallels.desktop.console"]}]},
+        {"description": "Parallels: Hyper + ⌥L: 按词右 (Ctrl+→)","type": "basic","from": {"key_code": "l","modifiers": {"mandatory": ["option"]}},"to": [{"key_code": "right_arrow","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.parallels.desktop.console"]}]},
+        {"description": "Parallels: Hyper + ⇧⌥H: 按词选左","type": "basic","from": {"key_code": "h","modifiers": {"mandatory": ["shift","option"]}},"to": [{"key_code": "left_arrow","modifiers": ["left_control","left_shift"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.parallels.desktop.console"]}]},
+        {"description": "Parallels: Hyper + ⇧⌥L: 按词选右","type": "basic","from": {"key_code": "l","modifiers": {"mandatory": ["shift","option"]}},"to": [{"key_code": "right_arrow","modifiers": ["left_control","left_shift"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.parallels.desktop.console"]}]},
+        {"description": "Parallels: Hyper + N: 删前词 (Ctrl+⌫)","type": "basic","from": {"key_code": "n"},"to": [{"key_code": "delete_or_backspace","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.parallels.desktop.console"]}]},
+        {"description": "Parallels: Hyper + .: 删后词 (Ctrl+⌦)","type": "basic","from": {"key_code": "period"},"to": [{"key_code": "delete_forward","modifiers": ["left_control"]}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.parallels.desktop.console"]}]},
+        {"description": "Parallels: Hyper + ⌘N: 删至行首","type": "basic","from": {"key_code": "n","modifiers": {"mandatory": ["command"]}},"to": [{"key_code": "home","modifiers": ["left_shift"]},{"key_code": "delete_or_backspace"}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.parallels.desktop.console"]}]},
+        {"description": "Parallels: Hyper + ⌘.: 删至行尾","type": "basic","from": {"key_code": "period","modifiers": {"mandatory": ["command"]}},"to": [{"key_code": "end","modifiers": ["left_shift"]},{"key_code": "delete_or_backspace"}],"conditions": [{"type": "variable_if","name": "hyper_on","value": 1},{"type": "frontmost_application_if","bundle_identifiers": ["com.parallels.desktop.console"]}]}
       ]
     },
     {
